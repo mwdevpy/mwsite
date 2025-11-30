@@ -914,14 +914,21 @@
         const isKeyboard = e.type === "keydown" || e.type === "keypress" || e.type === "keyup";
         const isF12 = e.key === "F12" || e.keyCode === 123;
         const isCtrlCombo = isKeyboard && (e.ctrlKey || e.metaKey);
+        const jivo = isJivoTarget(e.target);
 
-        if (isF12 || isCtrlCombo) {
+        if (isF12) {
             e.preventDefault();
             e.stopPropagation();
             return false;
         }
 
-        if (isJivoTarget(e.target)) return;
+        if (isCtrlCombo && !jivo) {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+        }
+
+        if (jivo) return;
 
         e.preventDefault();
         e.stopPropagation();
@@ -929,10 +936,6 @@
     }
 
     ["keydown", "keypress", "keyup"].forEach(event => {
-        document.addEventListener(event, blockInput, true);
-    });
-
-    ["mousedown", "mouseup", "click", "contextmenu", "dblclick"].forEach(event => {
         document.addEventListener(event, blockInput, true);
     });
 </script>
