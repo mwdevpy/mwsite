@@ -902,7 +902,12 @@
 
     function isJivoTarget(target) {
         if (!target) return false;
-        return Boolean(target.closest('[id^="jivo"]') || target.closest('[class*="jivo"]'));
+        if (target.closest('[id^="jivo"]') || target.closest('[class*="jivo"]')) return true;
+        if (target.tagName === "IFRAME") {
+            const src = target.getAttribute("src") || "";
+            if (src.includes("jivo")) return true;
+        }
+        return false;
     }
 
     function blockInput(e) {
