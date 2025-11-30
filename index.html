@@ -914,7 +914,7 @@
         const isKeyboard = e.type === "keydown" || e.type === "keypress" || e.type === "keyup";
         const isF12 = e.key === "F12" || e.keyCode === 123;
         const isCtrlCombo = isKeyboard && (e.ctrlKey || e.metaKey);
-        const jivo = isJivoTarget(e.target);
+        const jivo = isJivoTarget(e.target) || isJivoTarget(document.activeElement);
 
         if (isF12) {
             e.preventDefault();
