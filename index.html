@@ -927,12 +927,7 @@
             e.stopPropagation();
             return false;
         }
-
-        if (jivo) return;
-
-        e.preventDefault();
-        e.stopPropagation();
-        return false;
+        return;
     }
 
     ["keydown", "keypress", "keyup"].forEach(event => {
